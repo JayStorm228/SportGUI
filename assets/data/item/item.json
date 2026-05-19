@@ -1,0 +1,68 @@
+{
+  "Гантели разборные Bronze Gym||Bronze Gym": {
+    "name": "Гантели разборные Bronze Gym",
+    "manufacturer": "Bronze Gym",
+    "category": "Свободные веса",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Скамья DFC D702 PRO||DFC": {
+    "name": "Скамья DFC D702 PRO",
+    "manufacturer": "DFC",
+    "category": "Скамья и стойки",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Гребной тренажер WaterRower||WaterRower": {
+    "name": "Гребной тренажер WaterRower",
+    "manufacturer": "WaterRower",
+    "category": "Силовой тренажёр",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Шлем хоккейный Easton||Easton": {
+    "name": "Шлем хоккейный Easton",
+    "manufacturer": "Easton",
+    "category": "Защитный инвентарь",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Беговая дорожка Oxygen M-Concept||Oxygen": {
+    "name": "Беговая дорожка Oxygen M-Concept",
+    "manufacturer": "Oxygen",
+    "category": "Кардиотренажёр",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Тренажер для тяги Oxygen||Oxygen": {
+    "name": "Тренажер для тяги Oxygen",
+    "manufacturer": "Oxygen",
+    "category": "Силовой тренажёр",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Обрезиненные блины 20 кг||Body Sculpture": {
+    "name": "Обрезиненные блины 20 кг",
+    "manufacturer": "Body Sculpture",
+    "category": "Свободные веса",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Волейбольный мяч Mikasa V200W||Mikasa": {
+    "name": "Волейбольный мяч Mikasa V200W",
+    "manufacturer": "Mikasa",
+    "category": "Мяч",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Хоккейная клюшка Easton||Easton": {
+    "name": "Хоккейная клюшка Easton",
+    "manufacturer": "Easton",
+    "category": "Игровой инвентарь",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Медицинбол Puma||Puma": {
+    "name": "Медицинбол Puma",
+    "manufacturer": "Puma",
+    "category": "Мяч",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  },
+  "Велошлем Formand||Formand": {
+    "name": "Велошлем Formand",
+    "manufacturer": "Formand",
+    "category": "Защитный инвентарь",
+    "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png"
+  }
+}

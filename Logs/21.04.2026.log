@@ -1,0 +1,31 @@
+2026.04.21 22-42-50 -- INFO -- Created Item: Эллиптический тренажер Cybex 625A
+2026.04.21 22-42-50 -- INFO -- Created item: 
+Item(category=<ItemType.CARDIO_MACHINE: 'Кардиотренажёр'>, name='Эллиптический тренажер Cybex 625A', manufacturer='Cybex', amount=5, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 22-43-51 -- INFO -- Created Item: Фитнес-трекер Hidrate Spark
+2026.04.21 22-43-51 -- INFO -- Created item: 
+Item(category=<ItemType.ACCESSORY: 'Аксессуары'>, name='Фитнес-трекер Hidrate Spark', manufacturer='Hidrate', amount=6, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 22-43-51 -- INFO -- Successfully saved item: "Аксессуары -- Фитнес-трекер Hidrate Spark"
+2026.04.21 22-43-51 -- INFO -- Created Item: Ремень для жима Harbinger
+2026.04.21 22-43-51 -- INFO -- Created item: 
+Item(category=<ItemType.ACCESSORY: 'Аксессуары'>, name='Ремень для жима Harbinger', manufacturer='Harbinger', amount=10, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 22-43-51 -- INFO -- Successfully saved item: "Аксессуары -- Ремень для жима Harbinger"
+2026.04.21 22-45-26 -- INFO -- Created Item: Сміт-машина Yamota
+2026.04.21 22-45-26 -- INFO -- Created item: 
+Item(category=<ItemType.STRENGTH_MACHINE: 'Силовой тренажёр'>, name='Сміт-машина Yamota', manufacturer='Yamota', amount=2, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 23-16-30 -- INFO -- Created Item: Кроссовки Sigma Sport
+2026.04.21 23-16-30 -- INFO -- Created item: 
+Item(category=<ItemType.CLOTHING_SMALL: 'Малые вещи'>, name='Кроссовки Sigma Sport', manufacturer='Sigma', amount=5, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 23-17-38 -- INFO -- Created Item: Велоэргометр Life Fitness C1
+2026.04.21 23-17-38 -- INFO -- Created item: 
+Item(category=<ItemType.CARDIO_MACHINE: 'Кардиотренажёр'>, name='Велоэргометр Life Fitness C1', manufacturer='Life Fitness', amount=3, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 23-19-31 -- INFO -- Created Item: Коврик Manduka PRO
+2026.04.21 23-19-31 -- INFO -- Created item: 
+Item(category=<ItemType.FLEXIBILITY_EQUIPMENT: 'Оборудование для гибкости'>, name='Коврик Manduka PRO', manufacturer='Manduka', amount=3, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 23-23-44 -- INFO -- Created Item: Медицинбол Puma
+2026.04.21 23-23-44 -- INFO -- Created item: 
+Item(category=<ItemType.BALL: 'Мяч'>, name='Медицинбол Puma', manufacturer='Puma', amount=7, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 23-23-52 -- INFO -- Created Item: Блочный тренажер REBEL
+2026.04.21 23-23-52 -- INFO -- Created item: 
+Item(category=<ItemType.STRENGTH_MACHINE: 'Силовой тренажёр'>, name='Блочный тренажер REBEL', manufacturer='REBEL', amount=5, icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.21 23-29-58 -- INFO -- Successfully saved user: 'trs'
+2026.04.21 23-29-58 -- INFO --  Successfully loaded user: 'trs'

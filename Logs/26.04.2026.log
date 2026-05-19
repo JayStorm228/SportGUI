@@ -1,0 +1,92 @@
+2026.04.26 19-29-51 -- INFO -- Created Item: Фитнес-трекер Hidrate Spark
+2026.04.26 19-29-51 -- INFO -- Created item: 
+Item(category=<ItemType.ACCESSORY: 'Аксессуары'>, name='Фитнес-трекер Hidrate Spark', manufacturer='Hidrate', icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.26 19-30-52 -- INFO -- Created Item: Беговая дорожка Oxygen M-Concept
+2026.04.26 19-30-52 -- INFO -- Created item: 
+Item(category=<ItemType.CARDIO_MACHINE: 'Кардиотренажёр'>, name='Беговая дорожка Oxygen M-Concept', manufacturer='Oxygen', icon_path=WindowsPath('D:/Projects/SportGUI/assets/icons/icon.png'))
+2026.04.26 19-30-52 -- INFO -- Successfully saved item: "Кардиотренажёр -- Беговая дорожка Oxygen M-Concept"
+2026.04.26 19-34-31 -- INFO -- Created Item: Велоэргометр Life Fitness C1
+2026.04.26 19-34-31 -- INFO -- Created item: 
+Item: Велоэргометр Life Fitness C1||Life Fitness
+    category - Кардиотренажёр
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-34-57 -- INFO -- Created Item: Гантели разборные Bronze Gym
+2026.04.26 19-34-57 -- INFO -- Created item: 
+Item: Гантели разборные Bronze Gym||Bronze Gym
+    category - Свободные веса
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-34-57 -- INFO -- Successfully saved item: "Свободные веса -- Гантели разборные Bronze Gym"
+2026.04.26 19-35-31 -- INFO -- Created Item: Скамья DFC D702 PRO
+2026.04.26 19-35-31 -- INFO -- Created item: 
+Item: Скамья DFC D702 PRO||DFC
+    category - Скамья и стойки
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-35-31 -- INFO -- Successfully saved item: "Скамья и стойки -- Скамья DFC D702 PRO"
+2026.04.26 19-36-24 -- INFO -- Created Item: Гребной тренажер WaterRower
+2026.04.26 19-36-24 -- INFO -- Created item: 
+Item: Гребной тренажер WaterRower||WaterRower
+    category - Силовой тренажёр
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-36-24 -- INFO -- Successfully saved item: "Силовой тренажёр -- Гребной тренажер WaterRower"
+2026.04.26 19-36-24 -- INFO -- Successfully loaded item: Гребной тренажер WaterRower||WaterRower
+2026.04.26 19-36-24 -- INFO -- Created Item: Гребной тренажер WaterRower
+2026.04.26 19-48-31 -- INFO -- Created Item: Шлем хоккейный Easton
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Шлем хоккейный Easton||Easton
+    category - Защитный инвентарь
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Защитный инвентарь -- Шлем хоккейный Easton"
+2026.04.26 19-48-31 -- INFO -- Created Item: Беговая дорожка Oxygen M-Concept
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Беговая дорожка Oxygen M-Concept||Oxygen
+    category - Кардиотренажёр
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Кардиотренажёр -- Беговая дорожка Oxygen M-Concept"
+2026.04.26 19-48-31 -- INFO -- Created Item: Беговая дорожка Oxygen M-Concept
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Беговая дорожка Oxygen M-Concept||Oxygen
+    category - Кардиотренажёр
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Кардиотренажёр -- Беговая дорожка Oxygen M-Concept"
+2026.04.26 19-48-31 -- INFO -- Created Item: Шлем хоккейный Easton
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Шлем хоккейный Easton||Easton
+    category - Защитный инвентарь
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Защитный инвентарь -- Шлем хоккейный Easton"
+2026.04.26 19-48-31 -- INFO -- Created Item: Тренажер для тяги Oxygen
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Тренажер для тяги Oxygen||Oxygen
+    category - Силовой тренажёр
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Силовой тренажёр -- Тренажер для тяги Oxygen"
+2026.04.26 19-48-31 -- INFO -- Created Item: Обрезиненные блины 20 кг
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Обрезиненные блины 20 кг||Body Sculpture
+    category - Свободные веса
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Свободные веса -- Обрезиненные блины 20 кг"
+2026.04.26 19-48-31 -- INFO -- Created Item: Волейбольный мяч Mikasa V200W
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Волейбольный мяч Mikasa V200W||Mikasa
+    category - Мяч
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Мяч -- Волейбольный мяч Mikasa V200W"
+2026.04.26 19-48-31 -- INFO -- Created Item: Хоккейная клюшка Easton
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Хоккейная клюшка Easton||Easton
+    category - Игровой инвентарь
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Игровой инвентарь -- Хоккейная клюшка Easton"
+2026.04.26 19-48-31 -- INFO -- Created Item: Медицинбол Puma
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Медицинбол Puma||Puma
+    category - Мяч
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Мяч -- Медицинбол Puma"
+2026.04.26 19-48-31 -- INFO -- Created Item: Велошлем Formand
+2026.04.26 19-48-31 -- INFO -- Created item: 
+Item: Велошлем Formand||Formand
+    category - Защитный инвентарь
+    icon path - D:\Projects\SportGUI\assets\icons\icon.png
+2026.04.26 19-48-31 -- INFO -- Successfully saved item: "Защитный инвентарь -- Велошлем Formand"
