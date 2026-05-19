@@ -1,0 +1,29 @@
+{
+  "username": "StormRunner",
+  "password_hash": "9b8769a4a742959a2d0298c36fb70623f2dfacda8436237df08d8dfd5b37374c",
+  "registration_date": "19.05.2026",
+  "inventory": [
+    {
+      "id": "359e941b-027e-455a-8757-fb28c4f9f31e",
+      "category": "accessory",
+      "name": "Эспандер ленточный",
+      "manufacturer": "Kettler",
+      "amount": 7,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png",
+      "stackable": true,
+      "max_stack": 20
+    },
+    {
+      "id": "3beb0d8a-797f-43c7-92e3-cd3c0a826c46",
+      "category": "sports_gear",
+      "name": "Набор для пинг-понга",
+      "manufacturer": "Kettler",
+      "amount": 1,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\icon.png",
+      "stackable": false,
+      "max_stack": null
+    }
+  ]
+}

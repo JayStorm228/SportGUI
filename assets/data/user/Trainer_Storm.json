@@ -1,0 +1,172 @@
+{
+  "username": "Trainer_Storm",
+  "password_hash": "b9f6b889068ce373b549966e37a9e68aec3ce32399f2c85f88e8dc6a1a063f5f",
+  "registration_date": "19.05.2026",
+  "inventory": [
+    {
+      "id": "75d71e0f-f471-4fac-ac1c-2865320c6c97",
+      "category": "sports_gear",
+      "name": "Модернизированный Сверх-Снаряд",
+      "manufacturer": "Torneo",
+      "amount": 1,
+      "condition": "new",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "25547029-0ffa-4aa0-aacb-98ae9ed9c7fa",
+      "category": "sports_gear",
+      "name": "Набор для пинг-понга",
+      "manufacturer": "Under Armour",
+      "amount": 1,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "7416d626-8dcb-44c9-ae89-67871aa3180f",
+      "category": "protective_gear",
+      "name": "Щитки футбольные",
+      "manufacturer": "Torneo",
+      "amount": 1,
+      "condition": "broken",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "309bff01-14b0-4e26-9a36-d800769d78cb",
+      "category": "strength_machine",
+      "name": "Гакк-тренажер",
+      "manufacturer": "Nike",
+      "amount": 1,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "2750692e-378b-47ab-9e02-e162fab49c03",
+      "category": "strength_machine",
+      "name": "Тренажер для жима ногами",
+      "manufacturer": "Torneo",
+      "amount": 1,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "dac09953-8469-4073-83bc-c4b14484a489",
+      "category": "flexibility_equipment",
+      "name": "Коврик для йоги",
+      "manufacturer": "Kettler",
+      "amount": 1,
+      "condition": "broken",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\flexibility_equipment.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "bcadb28c-debb-4d0f-b081-8ac1b0f43345",
+      "category": "accessory",
+      "name": "Эспандер ленточный",
+      "manufacturer": "Under Armour",
+      "amount": 2,
+      "condition": "new",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\accessory.png",
+      "stackable": true,
+      "max_stack": 20
+    },
+    {
+      "id": "9ca04991-0c5d-4a4b-bcc0-4ec52d40f9ec",
+      "category": "free_weight",
+      "name": "Гриф олимпийский 20кг",
+      "manufacturer": "Kettler",
+      "amount": 18,
+      "condition": "broken",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\free_weight.png",
+      "stackable": true,
+      "max_stack": 20
+    },
+    {
+      "id": "914e80e5-9287-4ce0-9fa0-5e930886f51a",
+      "category": "accessory",
+      "name": "Эспандер ленточный",
+      "manufacturer": "Torneo",
+      "amount": 18,
+      "condition": "new",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\accessory.png",
+      "stackable": true,
+      "max_stack": 20
+    },
+    {
+      "id": "2cd6b3fa-3c01-44c8-9eb3-f57dcec21035",
+      "category": "cardio_machine",
+      "name": "Эллипсоид Ergo",
+      "manufacturer": "Kettler",
+      "amount": 1,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\cardio_machine.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "4bf76cd9-ed9d-49cc-8c3e-e8bbdfb0a40e",
+      "category": "strength_machine",
+      "name": "Тренажер для жима ногами",
+      "manufacturer": "Nike",
+      "amount": 1,
+      "condition": "new",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "2333876d-2d15-4624-8580-ee712286b0f4",
+      "category": "clothing_small",
+      "name": "Пояс атлетический",
+      "manufacturer": "Under Armour",
+      "amount": 11,
+      "condition": "broken",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\clothing_small.png",
+      "stackable": true,
+      "max_stack": 20
+    },
+    {
+      "id": "d50fd893-8d28-4461-882b-93778df80d0c",
+      "category": "cardio_machine",
+      "name": "Беговая дорожка X-Fit",
+      "manufacturer": "Kettler",
+      "amount": 1,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\cardio_machine.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "081c7918-9e6d-47e6-942f-6dd5889b4fc7",
+      "category": "bench",
+      "name": "Стойка для приседаний",
+      "manufacturer": "Under Armour",
+      "amount": 1,
+      "condition": "broken",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    },
+    {
+      "id": "e03d67f1-60af-46cd-a0d2-8311a8a75a5a",
+      "category": "strength_machine",
+      "name": "Тренажер для жима ногами",
+      "manufacturer": "Kettler",
+      "amount": 1,
+      "condition": "used",
+      "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\default.png",
+      "stackable": false,
+      "max_stack": null
+    }
+  ]
+}
