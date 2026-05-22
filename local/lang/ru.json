@@ -1,0 +1,51 @@
+{
+  "title_auth": "Авторизация",
+  "title_main": "Спортивный инвентарь — Прототип БД",
+
+  "lbl_loading": "Загрузка системы...",
+  "lbl_username": "Имя пользователя",
+  "lbl_password": "Пароль",
+  "lbl_total_items": "Предметов в БД",
+
+  "btn_login": "Войти",
+  "btn_register": "Регистрация",
+  "btn_goto_register": "Нет аккаунта? Зарегистрироваться",
+  "btn_goto_login": "Уже есть аккаунт? Войти",
+  "btn_add": "Добавить предмет",
+  "btn_delete": "Удалить",
+  "btn_edit": "Редактировать",
+
+  "prop_name": "Наименование",
+  "prop_manufacturer": "Производитель",
+  "prop_amount": "Количество",
+  "prop_condition": "Состояние",
+  "prop_category": "Категория",
+
+  "cat_cardio_machine": "Кардиотренажеры",
+  "cat_strength_machine": "Силовые тренажеры",
+  "cat_free_weight": "Свободные веса",
+  "cat_bench": "Скамьи и стойки",
+  "cat_flexibility_equipment": "Снаряды для растяжки",
+  "cat_ball": "Мячи",
+  "cat_sports_gear": "Игровой инвентарь",
+  "cat_protective_gear": "Защитный инвентарь",
+  "cat_clothing_small": "Малые вещи",
+  "cat_accessory": "Аксессуары",
+
+  "cond_new": "Новое",
+  "cond_used": "Б/У",
+  "cond_broken": "Требует ремонта",
+
+  "err_title": "Ошибка выполнения",
+  "err_validation_title": "Ошибка валидации",
+  "err_validation_empty": "Все поля формы обязательны к заполнению.",
+  "err_user_not_found": "Пользователь '{username}' отсутствует в базе данных.",
+  "err_user_already_exists": "Логин '{username}' уже занят другой учетной записью.",
+  "err_invalid_password": "Введен неверный пароль. Повторите попытку.",
+  "err_core_fault": "Сбой ядра аутентификации",
+
+  "msg_welcome_title": "Успешный вход",
+  "msg_welcome_body": "Добро пожаловать",
+
+  "dashboard_page_info": "Страница {current} из {total}"
+}

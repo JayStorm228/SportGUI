@@ -1,0 +1,22 @@
+{
+  "bg_main": "#1e1e1e",
+  "bg_dark": "#121212",
+  "bg_card": "#2d2d2d",
+  "text_primary": "#ffffff",
+  "text_secondary": "#aaaaaa",
+  "text_light": "#ffffff",
+  "border_color": "#3f3f46",
+  "accent_primary": "#007acc",
+  "accent_hover": "#1f8ad2",
+
+  "font_main": "'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif",
+  "font_mono": "'Courier New', monospace",
+
+  "size_title": "24px",
+  "size_subtitle": "18px",
+  "size_body": "14px",
+  "size_small": "12px",
+
+  "weight_bold": "bold",
+  "weight_normal": "normal"
+}

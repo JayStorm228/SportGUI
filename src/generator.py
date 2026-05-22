@@ -9,7 +9,8 @@ import random
 from pathlib import Path
 from typing import Dict, List, TypedDict
 
-from config import ItemGeneratorData, log_error, log_info
+from config import ItemGeneratorData, log_error
+from exceptions import GeneratorError
 from models import Item, ItemCondition, ItemType
 
 
@@ -27,118 +28,43 @@ FALLBACK_PROFILE: GeneratorProfileDict = {
 
 
 def _load_profile(profile_filename: str) -> GeneratorProfileDict:
-    """
-    Загружает JSON-профиль генератора.
-    Если файл поврежден, отсутствует или некорректен, безопасно возвращает базовый профиль.
-    """
     file_path: Path = ItemGeneratorData / profile_filename
 
-    # Если файла нет — создаем дефолтный DefaultItemGen.json, чтобы папка не была пустой
-    if not file_path.exists() and profile_filename == "DefaultItemGen.json":
-        try:
-            # Создаем структуру на основе встроенных данных для первого запуска
-            default_structure: GeneratorProfileDict = {
-                "manufacturers": [
-                    "Nike",
-                    "Adidas",
-                    "Torneo",
-                    "Kettler",
-                    "Under Armour",
-                ],
-                "presets": {
-                    ItemType.CARDIO_MACHINE.value: [
-                        "Беговая дорожка X-Fit",
-                        "Велотренажер CyclePro",
-                    ],
-                    ItemType.STRENGTH_MACHINE.value: [
-                        "Тренажер для жима ногами",
-                        "Кроссовер блочный",
-                    ],
-                    ItemType.FREE_WEIGHT.value: [
-                        "Гантель гексагональная 10кг",
-                        "Блин для штанги 20кг",
-                    ],
-                    ItemType.BENCH.value: [
-                        "Скамья для жима регулируемая",
-                        "Стойка для приседаний",
-                    ],
-                    ItemType.FLEXIBILITY_EQUIPMENT.value: [
-                        "Коврик для йоги",
-                        "Роллер массажный",
-                    ],
-                    ItemType.BALL.value: ["Мяч футбольный", "Мяч баскетбольный"],
-                    ItemType.SPORTS_GEAR.value: [
-                        "Ракетка для тенниса",
-                        "Набор для пинг-понга",
-                    ],
-                    ItemType.PROTECTIVE_GEAR.value: [
-                        "Шлем боксерский",
-                        "Щитки футбольные",
-                    ],
-                    ItemType.CLOTHING_SMALL.value: [
-                        "Жилет-утяжелитель 10кг",
-                        "Пояс атлетический",
-                    ],
-                    ItemType.ACCESSORY.value: [
-                        "Скакалка скоростная",
-                        "Эспандер ленточный",
-                    ],
-                },
-            }
-            file_path.write_text(
-                json.dumps(default_structure, indent=2, ensure_ascii=False),
-                encoding="utf-8",
-            )
-            log_info(
-                "DefaultItemGen.json generated successfully on zero-state trigger."
-            )
-            return default_structure
-        except Exception as e:
-            log_error(f"Failed to dump default itemgen profile: {e}")
-            return FALLBACK_PROFILE
+    if not file_path.exists():
+        log_error(f"Generation profile blueprint missing at: {file_path}")
+        return FALLBACK_PROFILE
 
-    # Читаем существующий файл с защитой от ошибок синтаксиса (JSONDecodeError)
     try:
-        data: GeneratorProfileDict = json.loads(file_path.read_text(encoding="utf-8"))
-
-        # Проверяем структуру: есть ли нужные корневые ключи
+        data = json.loads(file_path.read_text(encoding="utf-8"))
+        # Жесткая runtime-проверка структуры словаря для Pylance/mypy
         if "manufacturers" not in data or "presets" not in data:
-            raise KeyError("Missing core profile keys: 'manufacturers' or 'presets'")
-
+            raise GeneratorError(
+                "Invalid JSON schema layout inside generator blueprint."
+            )
         return data
     except Exception as e:
-        log_error(
-            f"Profile loading failed for {profile_filename!r} ({e}). Falling back to safe defaults."
-        )
+        log_error(f"Critical damage in item generator JSON array: {e}")
         return FALLBACK_PROFILE
 
 
 def generate_random_item(profile_name: str = "DefaultItemGen.json") -> Item:
-    """
-    Генерирует объект Item, используя указанный JSON-профиль из папки itemgenerator.
-    Если передан сторонний файл (например, 'UserCustom.json'), данные подтянутся из него.
-    """
+    """Генерирует строго типизированный валидный объект инвентаря."""
     profile = _load_profile(profile_name)
 
-    # 1. Выбираем случайную категорию инвентаря
-    category: ItemType = random.choice(list(ItemType))
+    if not profile.get("manufacturers") or not profile.get("presets"):
+        # Если даже резервный профиль пуст — это критический сбой подсистемы
+        raise GeneratorError("Item generator component is completely uninitialized.")
 
-    # 2. Безопасно достаем список названий для этой категории из JSON
-    # Если в пользовательском файле забыли указать эту категорию, берем запасное имя
+    category: ItemType = random.choice(list(ItemType))
     available_names = profile["presets"].get(category.value)
+
     if not available_names:
-        log_error(
-            f"Profile {profile_name!r} misses key {category.value!r}. Patching inline."
-        )
         available_names = [f"Инвентарь категории {category.name}"]
 
     name: str = random.choice(available_names)
-
-    # 3. Выбираем бренд и состояние
     manufacturer = random.choice(profile["manufacturers"])
     condition = random.choice(list(ItemCondition))
 
-    # 4. Логика стекирования (остаётся неизменной и надёжной)
     stackable_categories: List[ItemType] = [
         ItemType.BALL,
         ItemType.CLOTHING_SMALL,
@@ -146,16 +72,20 @@ def generate_random_item(profile_name: str = "DefaultItemGen.json") -> Item:
         ItemType.FREE_WEIGHT,
     ]
     is_stackable = category in stackable_categories
-
     max_stack = 20 if is_stackable else None
-    amount = random.randint(1, 20) if is_stackable else 1
+
+    import uuid
+
+    from config import Icons
 
     return Item(
+        id=str(uuid.uuid4()),
         category=category,
         name=name,
         manufacturer=manufacturer,
-        amount=amount,
+        amount=1 if not is_stackable else random.randint(1, 5),
         condition=condition,
+        icon_path=Icons / f"{category.value}.png",
         stackable=is_stackable,
         max_stack=max_stack,
     )

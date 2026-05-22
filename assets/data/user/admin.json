@@ -1,0 +1,272 @@
+{
+    "username": "admin",
+    "password_hash": "a023fd618f8549cb50a82d2040d0c33cd51c67c93bf19e465ddc2a0e3d393dd5",
+    "password_salt": "c4016ec75abac673b83b8e33ca21feda",
+    "registration_date": "22.05.2026",
+    "inventory": [
+        {
+            "id": "50c41052-9071-4d2d-a0fc-bdbc7f91c87c",
+            "category": "ball",
+            "name": "Медбол 5кг",
+            "manufacturer": "Nike",
+            "amount": 3,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\ball.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "76e46fb5-0749-49bc-bd81-198b09c7330f",
+            "category": "ball",
+            "name": "Мяч баскетбольный",
+            "manufacturer": "Adidas",
+            "amount": 5,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\ball.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "2367be50-c494-4fa4-b241-52824f4d06dc",
+            "category": "ball",
+            "name": "Медбол 5кг",
+            "manufacturer": "Under Armour",
+            "amount": 3,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\ball.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "b8a3a601-f4f0-4c53-aad7-4a234da03f0b",
+            "category": "accessory",
+            "name": "Эспандер ленточный",
+            "manufacturer": "Under Armour",
+            "amount": 5,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\accessory.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "02778844-6357-432c-ab0c-d537520229f8",
+            "category": "strength_machine",
+            "name": "Тренажер для жима ногами",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\strength_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "da7a9bd4-3f09-4a21-b4ab-9a6d47ad0b73",
+            "category": "strength_machine",
+            "name": "Тренажер для жима ногами",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\strength_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "46a75953-f1ae-4294-a431-d334b3e185a3",
+            "category": "cardio_machine",
+            "name": "Велотренажер CyclePro",
+            "manufacturer": "Under Armour",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\cardio_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "d4b2809a-0f5e-42bd-b716-c0fcdc50fe7e",
+            "category": "protective_gear",
+            "name": "Шлем боксерский",
+            "manufacturer": "Under Armour",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\protective_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "18047011-441c-4f2f-acd7-a832554aeb48",
+            "category": "bench",
+            "name": "Скамья для жима регулируемая",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\bench.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "a4f128a5-fbcb-4494-ac7f-3c1d53d00013",
+            "category": "bench",
+            "name": "Скамья для жима регулируемая",
+            "manufacturer": "Adidas",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\bench.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "58dde0e4-1c82-47f0-880c-c445b8c97980",
+            "category": "flexibility_equipment",
+            "name": "Роллер массажный",
+            "manufacturer": "Adidas",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\flexibility_equipment.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "17f0cf70-f9da-47d4-b9e0-3f8dab38014d",
+            "category": "clothing_small",
+            "name": "Пояс атлетический",
+            "manufacturer": "Torneo",
+            "amount": 2,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\clothing_small.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "04ea942f-02f2-49a6-a80a-dd4344765783",
+            "category": "protective_gear",
+            "name": "Шлем боксерский",
+            "manufacturer": "Under Armour",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\protective_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "6fe497b3-7a0a-4cd2-a746-61950d858f30",
+            "category": "free_weight",
+            "name": "Блин для штанги 20кг",
+            "manufacturer": "Kettler",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\free_weight.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "36cf7559-52ea-4fb3-aa54-6d37dddd2dee",
+            "category": "free_weight",
+            "name": "Блин для штанги 20кг",
+            "manufacturer": "Kettler",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\free_weight.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "ad8b4df1-2cc8-4af6-b502-585a7883b1b8",
+            "category": "flexibility_equipment",
+            "name": "Роллер массажный",
+            "manufacturer": "Kettler",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\flexibility_equipment.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "00b05c43-5623-44ee-bd99-3075e2013c21",
+            "category": "sports_gear",
+            "name": "Набор для пинг-понга",
+            "manufacturer": "Adidas",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\sports_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "d70c9a09-5363-42c5-a37d-662d8b49a09c",
+            "category": "free_weight",
+            "name": "Гриф олимпийский 20кг",
+            "manufacturer": "Under Armour",
+            "amount": 3,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\free_weight.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "92157c2f-4bf8-4490-a65f-2e0e01fe77d5",
+            "category": "accessory",
+            "name": "Скакалка скоростная",
+            "manufacturer": "Torneo",
+            "amount": 3,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\accessory.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "551e6d43-16bd-447b-8225-9180a07c92f9",
+            "category": "cardio_machine",
+            "name": "Велотренажер CyclePro",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\cardio_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "19ebc6c9-2e54-44cf-af5c-1674953b0f11",
+            "category": "ball",
+            "name": "Мяч баскетбольный",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\ball.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "5d61714c-054c-43ef-9592-e5844aa66a89",
+            "category": "clothing_small",
+            "name": "Пояс атлетический",
+            "manufacturer": "Adidas",
+            "amount": 2,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\clothing_small.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "36182725-62f3-4af8-8d23-301ba7f73b07",
+            "category": "strength_machine",
+            "name": "Кроссовер блочный",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\strength_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "b1f94f8b-89f4-4de0-9112-d0b20f115257",
+            "category": "flexibility_equipment",
+            "name": "Роллер массажный",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\flexibility_equipment.png",
+            "stackable": false,
+            "max_stack": null
+        }
+    ]
+}
