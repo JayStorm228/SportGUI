@@ -1,7 +1,206 @@
 {
     "username": "TheRisingStorm",
-    "password_hash": "88b1a2f399af44a1109bd77958ca28ca036a6594d0fbc385fd8e07465f4eb44b",
-    "password_salt": "3a1ed2db1ddbbead928bd744149dfb4f",
-    "registration_date": "22.05.2026",
-    "inventory": []
+    "password_hash": "a67edc535ad4d1749af565c6d4b22e969273651e7604b1f342414fc44b528a31",
+    "password_salt": "6e7a4afcb64feb9d5d43dc42e7f4f50f",
+    "registration_date": "24.05.2026",
+    "inventory": [
+        {
+            "id": "32156706-1843-4739-ab56-949fd50fc896",
+            "category": "bench",
+            "name": "Стойка для приседаний",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\bench.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "8d671053-541f-4fb1-8b30-2deb9a8e8ac3",
+            "category": "flexibility_equipment",
+            "name": "Роллер массажный",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\flexibility_equipment.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "2fb30a8b-539d-4ad1-8cbe-df1c9e36a832",
+            "category": "protective_gear",
+            "name": "Щитки футбольные",
+            "manufacturer": "Kettler",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\protective_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "cd03b5b8-7e69-4e23-8c95-f3c0c06759a9",
+            "category": "flexibility_equipment",
+            "name": "Коврик для йоги",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\flexibility_equipment.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "95ca9265-1e66-4e4d-b82b-4df831199385",
+            "category": "ball",
+            "name": "Мяч футбольный",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\ball.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "c19929b0-af07-4734-add2-7eb7c96708d4",
+            "category": "sports_gear",
+            "name": "Ракетка для тенниса",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\sports_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "67631b2a-ceb3-4a1f-b3f0-1eb2aaff2e7a",
+            "category": "ball",
+            "name": "Мяч баскетбольный",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\ball.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "a02255ae-fe19-4458-9734-8d04920eca9e",
+            "category": "sports_gear",
+            "name": "Ракетка для тенниса",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\sports_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "77907573-baf8-4afe-b7c6-4a3221ce2d20",
+            "category": "cardio_machine",
+            "name": "Беговая дорожка X-Fit",
+            "manufacturer": "Under Armour",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\cardio_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "260fa28d-6e82-400a-9d3d-7ed6c8e01ec8",
+            "category": "sports_gear",
+            "name": "Набор для пинг-понга",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\sports_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "1185dc5d-5e06-415a-89b0-add78f5a7768",
+            "category": "ball",
+            "name": "Медбол 5кг",
+            "manufacturer": "Torneo",
+            "amount": 3,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\ball.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "1dad4955-1db7-4161-992c-6f2d415075ad",
+            "category": "cardio_machine",
+            "name": "Велотренажер CyclePro",
+            "manufacturer": "Adidas",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\cardio_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "a470db05-c86e-4d0b-835d-93684d82740c",
+            "category": "flexibility_equipment",
+            "name": "Роллер массажный",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\flexibility_equipment.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "efe0cb94-6e04-4f68-88a6-63bda5f2f69e",
+            "category": "bench",
+            "name": "Скамья для жима регулируемая",
+            "manufacturer": "Kettler",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\bench.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "72a4a736-37d3-4785-8d3b-e2d364db6bdf",
+            "category": "free_weight",
+            "name": "Гриф олимпийский 20кг",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\free_weight.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "942faca5-8d77-4cb6-ad09-420dca0928c6",
+            "category": "clothing_small",
+            "name": "Жилет-утяжелитель 10кг",
+            "manufacturer": "Kettler",
+            "amount": 5,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\clothing_small.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "aea37df1-6d3f-43db-b731-2cdd47f73789",
+            "category": "protective_gear",
+            "name": "Шлем боксерский",
+            "manufacturer": "Under Armour",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\protective_gear.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "4b4c2539-1bb4-4db0-809d-e4f1212d3481",
+            "category": "clothing_small",
+            "name": "Жилет-утяжелитель 10кг",
+            "manufacturer": "Adidas",
+            "amount": 2,
+            "condition": "used",
+            "icon_path": "D:\\Projects\\SportGUI\\assets\\icons\\clothing_small.png",
+            "stackable": true,
+            "max_stack": 20
+        }
+    ]
 }

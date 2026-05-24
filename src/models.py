@@ -11,9 +11,12 @@ from pathlib import Path
 from typing import Callable, List, Optional, TypedDict
 
 # ТИПИЗАЦИЯ: Импортируем Pillow для оптимизации кастомной графики в GUI
-from PIL import Image
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
 
-from config import Icons, log_error, log_info, t
+from config import Icons, log_error, log_info
 from exceptions import ItemNotFoundError, ItemStackError
 
 InventoryCallback = Callable[[], None]
@@ -31,17 +34,11 @@ class ItemType(StrEnum):
     CLOTHING_SMALL = "clothing_small"
     ACCESSORY = "accessory"
 
-    def get_label(self) -> str:
-        return t(f"cat_{self.value}")
-
 
 class ItemCondition(StrEnum):
     NEW = "new"
     USED = "used"
     BROKEN = "broken"
-
-    def get_label(self) -> str:
-        return t(f"cond_{self.value}")
 
 
 class ItemSerializedDict(TypedDict):
@@ -64,7 +61,6 @@ class Item:
     amount: int
     condition: ItemCondition = ItemCondition.NEW
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    # По умолчанию ставим None, чтобы __post_init__ заполнил путь автоматически
     icon_path: Optional[Path] = None
     stackable: bool = False
     max_stack: Optional[int] = None
@@ -82,12 +78,10 @@ class Item:
 
         # --- АВТОМАТИЧЕСКИЙ ПОДБОР ИКОНКИ ---
         if self.icon_path is None:
-            # Пытаемся найти иконку конкретно под категорию (например, ball.png)
             category_icon = Icons / f"{self.category.value}.png"
             if category_icon.exists():
                 self.icon_path = category_icon
             else:
-                # Если такой иконки нет (или оффлайн), откатываемся на общую заглушку
                 self.icon_path = Icons / "default.png"
 
         log_info(f"Item initialized. Bound icon path: {self.icon_path.name}")
@@ -97,31 +91,25 @@ class Item:
         Берет любое изображение с ПК пользователя, сжимает его до 256x256
         через Pillow для экономии памяти GUI и сохраняет в ассеты как PNG.
         """
+        if Image is None:
+            raise ImportError("Pillow library is required for custom icon compression.")
+
         if not external_file_path.exists():
             raise FileNotFoundError(
                 f"Selected source image {external_file_path} does not exist."
             )
 
-        # Расширяем список поддерживаемых форматов для Pillow
         extension = external_file_path.suffix.lower()
         if extension not in [".png", ".jpg", ".jpeg", ".webp", ".bmp"]:
             raise ValueError("Unsupported image format. Use PNG, JPG, WEBP or BMP.")
 
-        # Фиксируем формат PNG: он идеален для иконок интерфейса из-за поддержки альфа-канала (прозрачности)
         new_filename = f"custom_{self.id}.png"
         destination_path = Icons / new_filename
 
         try:
-            # Открываем изображение через контекстный менеджер Pillow
             with Image.open(external_file_path) as img:
-                # Задаем целевой максимальный размер для ячейки инвентаря
                 target_size: tuple[int, int] = (256, 256)
-
-                # thumbnail() пропорционально уменьшает картинку, если она больше 256x256.
-                # Resampling.LANCZOS обеспечивает максимальную четкость при сжатии.
                 img.thumbnail(target_size, Image.Resampling.LANCZOS)
-
-                # Сохраняем с флагом оптимизации веса файла
                 img.save(destination_path, "PNG", optimize=True)
 
             self.icon_path = destination_path
@@ -143,10 +131,6 @@ class Item:
         )
 
     def stack_up(self, amount_to_add: int) -> None:
-        """
-        Увеличивает количество предметов в стеке.
-        ТИПИЗАЦИЯ И ОШИБКИ: Выбрасывает ItemStackError вместо ValueError.
-        """
         if not self.stackable:
             raise ItemStackError(f"Item '{self.name}' is non-stackable.")
 
@@ -166,34 +150,27 @@ class Item:
 
 @dataclass
 class Inventory:
-    # Список предметов инвентаря
     items: list[Item] = field(default_factory=lambda: [])
-
-    # ИСПРАВЛЕНИЕ ДЛЯ PYLANCE: Используем кастомный тип InventoryCallback.
-    # Конструкция lambda: [] явно говорит тайп-чекеру: "Здесь создается пустой список под кастомный тип".
     _listeners: list[InventoryCallback] = field(
         default_factory=lambda: [], repr=False, compare=False
     )
 
     def subscribe(self, callback_function: InventoryCallback) -> None:
-        """
-        Регистрирует внешнюю функцию интерфейса, которую нужно вызвать при изменении данных.
-        """
         if callback_function not in self._listeners:
             self._listeners.append(callback_function)
 
+    def unsubscribe(self, callback_function: InventoryCallback) -> None:
+        if callback_function in self._listeners:
+            self._listeners.remove(callback_function)
+
     def _notify_listeners(self) -> None:
-        """
-        Внутренний служебный метод: перебирает всех подписчиков и вызывает их функции.
-        """
         for callback in self._listeners:
             try:
-                callback()  # Вызываем сохраненную функцию окна интерфейса
+                callback()
             except Exception as e:
                 log_error(f"Error notifying inventory listener: {e}")
 
     def add_item(self, item: Item) -> None:
-        """Добавляет предмет с автоматическим умным стекированием."""
         if item.stackable:
             for existing in self.items:
                 if existing.can_stack_with(item):
@@ -205,17 +182,12 @@ class Inventory:
                         self._notify_listeners()
                         return
                     except ItemStackError:
-                        # Если этот конкретный стек заполнен, ищем следующий или добавим отдельной ячейкой
                         pass
         self.items.append(item)
         log_info(f"New discrete slot added to inventory: '{item.name}'")
         self._notify_listeners()
 
     def remove_item(self, item_id: str) -> None:
-        """
-        Удаляет предмет по ID.
-        ТИПИЗАЦИЯ И ОШИБКИ: Выбрасывает ItemNotFoundError, если ID некорректен.
-        """
         target = next((it for it in self.items if it.id == item_id), None)
         if not target:
             raise ItemNotFoundError(f"Cannot delete item. ID '{item_id}' not found.")
@@ -230,7 +202,13 @@ class Inventory:
         new_name: str | None = None,
         new_manufacturer: str | None = None,
         new_condition: ItemCondition | None = None,
+        new_category: ItemType | None = None,
+        new_amount: int | None = None,
+        new_stackable: bool | None = None,
+        new_max_stack: int | None = None,
+        new_icon_path: Path | None = None,
     ) -> None:
+        """Переработанная версия для редактирования полной структуры предмета."""
         target_item = next((it for it in self.items if it.id == item_id), None)
         if not target_item:
             raise ValueError(f"Item with ID {item_id} not found.")
@@ -241,7 +219,20 @@ class Inventory:
             target_item.manufacturer = new_manufacturer.strip()
         if new_condition:
             target_item.condition = new_condition
+        if new_category:
+            target_item.category = new_category
+        if new_amount is not None:
+            target_item.amount = new_amount
+        if new_stackable is not None:
+            target_item.stackable = new_stackable
+        if new_max_stack is not None:
+            target_item.max_stack = new_max_stack
+        if new_icon_path:
+            target_item.icon_path = new_icon_path
 
+        target_item._validate_amount()
+
+        # Попытка объединить отредактированный предмет с существующим совместимым стеком
         if target_item.stackable:
             for existing_item in self.items:
                 if existing_item.id != target_item.id and existing_item.can_stack_with(
@@ -250,13 +241,15 @@ class Inventory:
                     try:
                         existing_item.stack_up(target_item.amount)
                         self.items.remove(target_item)
-                        # При редактировании предмет объединился с другим стеком -> уведомляем UI
+                        log_info(
+                            f"Merged edited item {item_id} into existing stack: {existing_item.id}"
+                        )
                         self._notify_listeners()
                         return
-                    except ValueError:
+                    except (ValueError, ItemStackError):
                         pass
 
-        # Текст или свойства предмета просто изменились -> уведомляем UI
+        log_info(f"Item {item_id} successfully edited and saved on disk.")
         self._notify_listeners()
 
     def get_filtered_and_sorted(
@@ -283,4 +276,6 @@ class Inventory:
             result.sort(key=lambda it: it.name.casefold())
         elif sort_by == "amount":
             result.sort(key=lambda it: it.amount, reverse=True)
+        elif sort_by == "manufacturer":
+            result.sort(key=lambda it: it.manufacturer.casefold())
         return result

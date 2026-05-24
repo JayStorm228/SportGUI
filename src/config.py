@@ -1,18 +1,25 @@
 """
-config.py
-Глобальная конфигурация приложения. Включает автоматическую сборку
-инфраструктуры папок, загрузку ассетов и инициализацию подсистем UI.
+config.py (Скорректированная версия под структуру src/)
 """
 
-import urllib.request
+import sys
 from datetime import datetime
 from pathlib import Path
 
 # --- НАСТРОЙКИ ПУТЕЙ (PROJECT PATHS) ---
+# SCRIPT_DIR теперь указывает на папку 'src'
 SCRIPT_DIR: Path = Path(__file__).resolve().parent
-ROOT_DIR: Path = SCRIPT_DIR.parent
 
-# Выделенные папки под архитектуру UI по твоему запросу
+# Проверяем, запущено ли приложение как скомпилированный EXE (PyInstaller)
+IS_FROZEN = getattr(sys, "frozen", False)
+
+if IS_FROZEN:
+    # В скомпилированном виде корневая папка - это папка с EXE (внутри папки установки)
+    ROOT_DIR: Path = Path(sys.executable).resolve().parent
+else:
+    # В режиме разработки config.py лежит в src/, поэтому корень проекта - это родительская папка src/ (SPORTGUI)
+    ROOT_DIR: Path = SCRIPT_DIR.parent
+
 LangData: Path = ROOT_DIR / "local" / "lang"
 ThemeData: Path = ROOT_DIR / "local" / "theme"
 
@@ -55,9 +62,10 @@ def log_error(message: str) -> None:
 
 # --- ССЫЛКИ НА ИКОНКИ ---
 ICON_URLS: dict[str, str] = {
+    "default": "https://img.icons8.com/ios-filled/100/sports-mode.png",
     "icon": "https://img.icons8.com/ios-filled/100/sports-mode.png",
     "cardio_machine": "https://img.icons8.com/ios-filled/100/treadmill.png",
-    "strength_machine": "https://img.icons8.com/ios-filled/100/gym.png",  # <-- Новый рабочий URL
+    "strength_machine": "https://img.icons8.com/ios-filled/100/barbell.png",
     "free_weight": "https://img.icons8.com/ios-filled/100/dumbbell.png",
     "bench": "https://img.icons8.com/ios-filled/100/bench-press.png",
     "flexibility_equipment": "https://img.icons8.com/ios-filled/100/yoga.png",
@@ -70,43 +78,6 @@ ICON_URLS: dict[str, str] = {
 
 
 def init_storage() -> None:
-    """Создает структуру папок и генерирует базовые ассеты/конфиги."""
-    # 1. Генерируем папки, включая новые директории локализации и тем
+    """Создает структуру папок. Скачивание ассетов перенесено во вспомогательный поток UI."""
     for folder in [Data, UserData, ItemGeneratorData, Icons, Logs, LangData, ThemeData]:
         folder.mkdir(parents=True, exist_ok=True)
-
-    # 2. Скачиваем базовые иконки
-    print("Checking system graphical assets...")
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-
-    for icon_name, url in ICON_URLS.items():
-        target_path = Icons / f"{icon_name}.png"
-        if not target_path.exists():
-            try:
-                print(f"Downloading asset: {icon_name}.png ...")
-                req = urllib.request.Request(url, headers=headers)
-                with urllib.request.urlopen(req, timeout=5) as response:
-                    target_path.write_bytes(response.read())
-                log_info(f"Asset bootstrapped from cloud storage: {icon_name}.png")
-            except Exception as e:
-                log_error(f"Failed to download icon {icon_name}: {e}")
-                print(f"[WARNING] Could not download {icon_name}.png")
-
-
-# --- ИНИЦИАЛИЗАЦИЯ ПОД СИСТЕМ UI МЕНЕДЖЕРОВ ---
-# Импортируем созданные классы
-from ui_managers import LocalizationManager, ThemeManager
-
-# Инициализируем синглтоны. При первом запуске они подгрузят дефолтные файлы.
-# (В реальном приложении мы бы сначала проверили наличие json, но синглтоны умеют возвращать заглушки)
-lang_manager = LocalizationManager(LangData, default_lang="ru")
-theme_manager = ThemeManager(ThemeData, default_theme="dark")
-
-
-# Прокси-функция перевода, чтобы остальному коду не пришлось менять сигнатуру вызова
-def t(key: str, **kwargs: str | int) -> str:
-    """
-    Глобальный мост локализации.
-    ТИПИЗАЦИЯ: kwargs принимает только строки или числа для подстановки в шаблоны строк.
-    """
-    return lang_manager.translate(key, **kwargs)

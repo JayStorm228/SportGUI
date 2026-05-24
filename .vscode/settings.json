@@ -20,7 +20,7 @@
   // --- Pylance / типизация / inlay hints ---
   "python.languageServer": "Pylance",
   // уровень проверок типов
-  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.typeCheckingMode": "standard",
   // подсказки типов прямо в коде (переменные / возвраты)
   "python.analysis.inlayHints.variableTypes": true,
   "python.analysis.inlayHints.functionReturnTypes": true,

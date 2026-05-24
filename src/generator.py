@@ -6,21 +6,20 @@ generator.py
 
 import json
 import random
+import uuid
 from pathlib import Path
 from typing import Dict, List, TypedDict
 
-from config import ItemGeneratorData, log_error
+from config import Icons, ItemGeneratorData, log_error, log_info
 from exceptions import GeneratorError
 from models import Item, ItemCondition, ItemType
 
 
-# --- ОПИСАНИЕ СТРУКТУРЫ JSON ДЛЯ ПРЕДОТВРАЩЕНИЯ ОШИБОК ---
 class GeneratorProfileDict(TypedDict):
     manufacturers: List[str]
     presets: Dict[str, List[str]]
 
 
-# Жесткий резервный хардкод на случай, если с диска вообще всё удалили
 FALLBACK_PROFILE: GeneratorProfileDict = {
     "manufacturers": ["Generic Brand"],
     "presets": {k.value: [f"Default {k.name} Item"] for k in ItemType},
@@ -36,7 +35,6 @@ def _load_profile(profile_filename: str) -> GeneratorProfileDict:
 
     try:
         data = json.loads(file_path.read_text(encoding="utf-8"))
-        # Жесткая runtime-проверка структуры словаря для Pylance/mypy
         if "manufacturers" not in data or "presets" not in data:
             raise GeneratorError(
                 "Invalid JSON schema layout inside generator blueprint."
@@ -52,7 +50,6 @@ def generate_random_item(profile_name: str = "DefaultItemGen.json") -> Item:
     profile = _load_profile(profile_name)
 
     if not profile.get("manufacturers") or not profile.get("presets"):
-        # Если даже резервный профиль пуст — это критический сбой подсистемы
         raise GeneratorError("Item generator component is completely uninitialized.")
 
     category: ItemType = random.choice(list(ItemType))
@@ -74,11 +71,7 @@ def generate_random_item(profile_name: str = "DefaultItemGen.json") -> Item:
     is_stackable = category in stackable_categories
     max_stack = 20 if is_stackable else None
 
-    import uuid
-
-    from config import Icons
-
-    return Item(
+    item = Item(
         id=str(uuid.uuid4()),
         category=category,
         name=name,
@@ -89,3 +82,5 @@ def generate_random_item(profile_name: str = "DefaultItemGen.json") -> Item:
         stackable=is_stackable,
         max_stack=max_stack,
     )
+    log_info(f"Random item generated: {item.name} ({item.category.value})")
+    return item

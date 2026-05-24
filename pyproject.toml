@@ -1,12 +1,42 @@
 [project]
 name = "sportgui"
 version = "0.1.0"
-description = "Add your description here"
+description = "Десктопное приложение для управления спортивным инвентарем на базе PySide6 с динамической локализацией и темами оформления."
 readme = "README.md"
 requires-python = ">=3.14"
+authors = [
+    { name = "TheRisingStorm", email = "ppavlov2612@gmail.com" }
+]
+license = { text = "MIT" }
 dependencies = [
     "black>=26.3.1",
     "pillow>=12.2.0",
+    "pyinstaller>=6.20.0",
     "pyside6>=6.11.1",
     "ruff>=0.15.11",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.black]
+line-length = 88
+target-version = ["py314"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+select = ["E", "F", "I", "W"]
+ignore = []
+
+[tool.ruff.isort]
+combine-as-imports = true
