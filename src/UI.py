@@ -289,9 +289,9 @@ class RotatingGearWidget(QWidget):
             tooth_path.addPolygon(poly)
             path = path.united(tooth_path).simplified()
 
-        hole_path = QPainterPath()
-        hole_path.addEllipse(QPointF(0, 0), hole_r, hole_r)
-        gear_path = path.subtracted(hole_path)
+        user_path = QPainterPath()
+        user_path.addEllipse(QPointF(0, 0), hole_r, hole_r)
+        gear_path = path.subtracted(user_path)
 
         painter.drawPath(gear_path)
 
@@ -981,7 +981,7 @@ class RegisterForm(QWidget):
             self.edt_pass.setStyleSheet("border: 1px solid #ef4444;")
             valid = False
         elif any(ord(c) >= 128 for c in pwd) or len(pwd) < 3 or len(pwd) > 30:
-            self.lbl_pass_err.setText(tm.get("err_validation_chars"))
+            self.lbl_reg_err.setText(tm.get("err_validation_chars"))
             self.edt_pass.setStyleSheet("border: 1px solid #ef4444;")
             valid = False
 
@@ -1363,11 +1363,18 @@ class HoverCard(QWidget):
 
         self.opacity_effect = QGraphicsOpacityEffect(self)
         self.setGraphicsEffect(self.opacity_effect)
+
         self.anim = QPropertyAnimation(self.opacity_effect, b"opacity")
         self.anim.setDuration(150)
 
+        # ИСПРАВЛЕНИЕ: Стабильное подключение завершения анимации без накопления сигналов (Bug 4)
+        self.anim.finished.connect(self.on_animation_finished)
+        self.fade_out_active = False
+
     def show_item(self, item: Item, pos: QPoint):
         self.anim.stop()
+        self.fade_out_active = False
+        self.opacity_effect.setOpacity(1.0)
 
         tm = TranslationManager()
         th = ThemeManager()
@@ -1420,7 +1427,28 @@ class HoverCard(QWidget):
         """
         )
 
-        self.move(pos + QPoint(16, 16))
+        # ИСПРАВЛЕНИЕ: Детекция границ экрана для предотвращения выхода карточки за его пределы (Bug 5)
+        self.adjustSize()
+        card_width = self.width()
+        card_height = self.height()
+
+        screen_geom = QApplication.primaryScreen().availableGeometry()
+        x = pos.x() + 16
+        y = pos.y() + 16
+
+        # Если карточка выходит за правый край, смещаем её влево от курсора
+        if x + card_width > screen_geom.right():
+            x = pos.x() - card_width - 16
+
+        # Если карточка выходит за нижний край, смещаем её выше курсора
+        if y + card_height > screen_geom.bottom():
+            y = pos.y() - card_height - 16
+
+        # Ограничиваем рамками экрана
+        x = max(screen_geom.left(), min(x, screen_geom.right() - card_width))
+        y = max(screen_geom.top(), min(y, screen_geom.bottom() - card_height))
+
+        self.move(QPoint(x, y))
         self.show()
 
         self.anim.setStartValue(0.0)
@@ -1429,19 +1457,15 @@ class HoverCard(QWidget):
 
     def hide_card(self):
         self.anim.stop()
+        self.fade_out_active = True
         self.anim.setStartValue(self.opacity_effect.opacity())
         self.anim.setEndValue(0.0)
-
-        def on_fade_out():
-            if self.opacity_effect.opacity() == 0.0:
-                self.hide()
-
-        try:
-            self.anim.finished.disconnect()
-        except RuntimeError:
-            pass
-        self.anim.finished.connect(on_fade_out)
         self.anim.start()
+
+    def on_animation_finished(self):
+        if self.fade_out_active and self.opacity_effect.opacity() == 0.0:
+            self.hide()
+            self.fade_out_active = False
 
 
 # =====================================================================
@@ -1708,6 +1732,12 @@ class InventoryGridView(QWidget):
         self.refresh_grid()
 
     def refresh_grid(self):
+        # ИСПРАВЛЕНИЕ: Перед очисткой разметки принудительно гасим ховер-карточку во избежание зависания (Bug 3)
+        main_win = self.window()
+        hide_func = getattr(main_win, "hide_hover_card", None)
+        if callable(hide_func):
+            hide_func()
+
         while self.grid_layout.count():
             item = self.grid_layout.takeAt(0)
             w = item.widget()
@@ -1871,6 +1901,7 @@ class LeftMenuWidget(QWidget):
         layout.addWidget(self.sys_group)
 
         self.edt_search.textChanged.connect(lambda: self.filters_changed.emit())
+        # Исправлено подключение сигналаcurrentIndexChanged во избежание TypeError в рантайме (Bug 6)
         self.cmb_category.currentIndexChanged.connect(
             lambda: self.filters_changed.emit()
         )
@@ -1909,7 +1940,6 @@ class LeftMenuWidget(QWidget):
         self.cmb_sort.addItem(tm.get("sort_none"), "none")
         self.cmb_sort.addItem(tm.get("sort_name"), "name")
         self.cmb_sort.addItem(tm.get("sort_amount"), "amount")
-        # ИСПРАВЛЕНИЕ: Интегрирована сортировка по производителю
         self.cmb_sort.addItem(tm.get("sort_manufacturer"), "manufacturer")
         self.cmb_sort.blockSignals(False)
 
@@ -2231,7 +2261,6 @@ class EditItemPage(QWidget):
 
         self.update_icon_view()
 
-    # ИСПРАВЛЕНИЕ: Создание пустого шаблона под форму добавления нового элемента инвентаря
     def prepare_for_creation(self):
         """Подготавливает форму для создания совершенно нового предмета."""
         self.current_item_id = str(uuid.uuid4())
@@ -2275,11 +2304,21 @@ class EditItemPage(QWidget):
         )
         if file_path:
             try:
+                # ИСПРАВЛЕНИЕ: Предотвращаем сбой неявного приведения типа QVariant (StrEnum -> str) на уровне GUI
+                cat_val = self.cmb_category.currentData()
+                if cat_val is not None and not isinstance(cat_val, ItemType):
+                    try:
+                        cat_val = ItemType(str(cat_val))
+                    except ValueError:
+                        cat_val = ItemType.CARDIO_MACHINE
+                elif cat_val is None:
+                    cat_val = ItemType.CARDIO_MACHINE
+
                 temp_item = Item(
                     id=self.current_item_id,
-                    category=self.cmb_category.currentData(),
-                    name=self.edt_name.text(),
-                    manufacturer=self.edt_mfr.text(),
+                    category=cat_val,
+                    name=self.edt_name.text() or "Temp",
+                    manufacturer=self.edt_mfr.text() or "Temp",
                     amount=1,
                 )
                 temp_item.change_custom_icon(Path(file_path))
@@ -2516,7 +2555,7 @@ class DashboardWindow(QWidget):
     def close_edit_page(self):
         self.right_stack.setCurrentIndex(0)
 
-    # ИСПРАВЛЕНИЕ: Интегрирована одновременная обработка сохранения редактирования и создания нового предмета
+    # ИСПРАВЛЕНИЕ: Интегрировано безопасное приведение типов данных для предотвращения сбоев сохранения (Bug 1)
     def save_item_edits(self, item_id, updated_data):
         user = session_manager.current_user
         try:
@@ -2524,17 +2563,51 @@ class DashboardWindow(QWidget):
             if item_id:
                 is_new = not any(it.id == item_id for it in user.inventory.items)
 
+            # Безопасное ручное приведение типов данных перед отправкой в модели
+            cat = updated_data["new_category"]
+            if cat is not None and not isinstance(cat, ItemType):
+                try:
+                    cat = ItemType(str(cat))
+                except ValueError:
+                    cat = ItemType.CARDIO_MACHINE
+
+            cond = updated_data["new_condition"]
+            if cond is not None and not isinstance(cond, ItemCondition):
+                try:
+                    cond = ItemCondition(str(cond))
+                except ValueError:
+                    cond = ItemCondition.NEW
+
+            amount = (
+                int(updated_data["new_amount"])
+                if updated_data["new_amount"] is not None
+                else 1
+            )
+
+            max_stack = updated_data["new_max_stack"]
+            if max_stack is not None:
+                try:
+                    max_stack = int(max_stack)
+                except (ValueError, TypeError):
+                    max_stack = None
+
+            stackable = bool(updated_data["new_stackable"])
+
+            icon_path_val = updated_data["new_icon_path"]
+            if icon_path_val is not None:
+                icon_path_val = Path(icon_path_val)
+
             if is_new:
                 new_item = Item(
-                    id=item_id,
-                    category=updated_data["new_category"],
-                    name=updated_data["new_name"],
-                    manufacturer=updated_data["new_manufacturer"],
-                    amount=updated_data["new_amount"],
-                    condition=updated_data["new_condition"],
-                    stackable=updated_data["new_stackable"],
-                    max_stack=updated_data["new_max_stack"],
-                    icon_path=updated_data["new_icon_path"],
+                    id=str(item_id),
+                    category=cat,
+                    name=str(updated_data["new_name"]),
+                    manufacturer=str(updated_data["new_manufacturer"]),
+                    amount=amount,
+                    condition=cond,
+                    stackable=stackable,
+                    max_stack=max_stack,
+                    icon_path=icon_path_val,
                 )
                 user.inventory.add_item(new_item)
             else:
@@ -2542,12 +2615,12 @@ class DashboardWindow(QWidget):
                     item_id=item_id,
                     new_name=updated_data["new_name"],
                     new_manufacturer=updated_data["new_manufacturer"],
-                    new_condition=updated_data["new_condition"],
-                    new_category=updated_data["new_category"],
-                    new_amount=updated_data["new_amount"],
-                    new_stackable=updated_data["new_stackable"],
-                    new_max_stack=updated_data["new_max_stack"],
-                    new_icon_path=updated_data["new_icon_path"],
+                    new_condition=cond,
+                    new_category=cat,
+                    new_amount=amount,
+                    new_stackable=stackable,
+                    new_max_stack=max_stack,
+                    new_icon_path=icon_path_val,
                 )
             self.right_stack.setCurrentIndex(0)
         except Exception as e:

@@ -76,6 +76,19 @@ class Item:
     def __post_init__(self) -> None:
         self._validate_amount()
 
+        # ИСПРАВЛЕНИЕ: Безопасное приведение типов в конструкторе (на случай строк от PySide6)
+        if not isinstance(self.category, ItemType):
+            try:
+                self.category = ItemType(str(self.category))
+            except ValueError:
+                self.category = ItemType.CARDIO_MACHINE
+
+        if not isinstance(self.condition, ItemCondition):
+            try:
+                self.condition = ItemCondition(str(self.condition))
+            except ValueError:
+                self.condition = ItemCondition.NEW
+
         # --- АВТОМАТИЧЕСКИЙ ПОДБОР ИКОНКИ ---
         if self.icon_path is None:
             category_icon = Icons / f"{self.category.value}.png"
@@ -83,6 +96,8 @@ class Item:
                 self.icon_path = category_icon
             else:
                 self.icon_path = Icons / "default.png"
+        else:
+            self.icon_path = Path(self.icon_path)
 
         log_info(f"Item initialized. Bound icon path: {self.icon_path.name}")
 
@@ -104,7 +119,7 @@ class Item:
             raise ValueError("Unsupported image format. Use PNG, JPG, WEBP or BMP.")
 
         new_filename = f"custom_{self.id}.png"
-        destination_path = Icons / new_filename
+        destination_path = (Icons / new_filename).resolve()
 
         try:
             with Image.open(external_file_path) as img:
@@ -192,6 +207,19 @@ class Inventory:
         if not target:
             raise ItemNotFoundError(f"Cannot delete item. ID '{item_id}' not found.")
 
+        # Автоматически удаляем файл кастомной иконки с диска, если он существует (Garbage Collector)
+        if target.icon_path and "custom_" in target.icon_path.name:
+            try:
+                if target.icon_path.exists():
+                    target.icon_path.unlink()
+                    log_info(
+                        f"Purged custom icon file from disk: {target.icon_path.name}"
+                    )
+            except Exception as e:
+                log_error(
+                    f"Failed to delete custom icon file {target.icon_path.name}: {e}"
+                )
+
         self.items.remove(target)
         log_info(f"Item with ID {item_id} successfully purged.")
         self._notify_listeners()
@@ -217,17 +245,31 @@ class Inventory:
             target_item.name = new_name.strip()
         if new_manufacturer:
             target_item.manufacturer = new_manufacturer.strip()
-        if new_condition:
+
+        # ИСПРАВЛЕНИЕ: Принудительное приведение типов при редактировании полей Enum (Bug 2)
+        if new_condition is not None:
+            if not isinstance(new_condition, ItemCondition):
+                try:
+                    new_condition = ItemCondition(str(new_condition))
+                except ValueError:
+                    new_condition = ItemCondition.NEW
             target_item.condition = new_condition
-        if new_category:
+
+        if new_category is not None:
+            if not isinstance(new_category, ItemType):
+                try:
+                    new_category = ItemType(str(new_category))
+                except ValueError:
+                    new_category = ItemType.CARDIO_MACHINE
             target_item.category = new_category
+
         if new_amount is not None:
             target_item.amount = new_amount
         if new_stackable is not None:
             target_item.stackable = new_stackable
         if new_max_stack is not None:
             target_item.max_stack = new_max_stack
-        if new_icon_path:
+        if new_icon_path is not None:
             target_item.icon_path = new_icon_path
 
         target_item._validate_amount()

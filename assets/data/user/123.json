@@ -3,5 +3,72 @@
     "password_hash": "6b1eec5ff888e2c9223f115ca86709529b42d4c9e29851bc76701186614d854c",
     "password_salt": "3d437d6091fb3dfd1508a9378a007731",
     "registration_date": "24.05.2026",
-    "inventory": []
+    "inventory": [
+        {
+            "id": "dc5a026b-a178-414f-a4a1-bff00d8b66bf",
+            "category": "cardio_machine",
+            "name": "Беговая дорожка X-Fit",
+            "manufacturer": "Kettler",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "assets/icons/custom_dc5a026b-a178-414f-a4a1-bff00d8b66bf.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "b737df22-eaf6-4649-a1a2-cab772eb95a4",
+            "category": "clothing_small",
+            "name": "Пояс атлетический",
+            "manufacturer": "Kettler",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "assets/icons/custom_b737df22-eaf6-4649-a1a2-cab772eb95a4.png",
+            "stackable": true,
+            "max_stack": 20
+        },
+        {
+            "id": "062e7bee-7c3c-4d4b-9085-22249ed09622",
+            "category": "cardio_machine",
+            "name": "123",
+            "manufacturer": "123",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "assets/icons/cardio_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "5b1654ae-99b6-45ad-b927-dee29e75abcc",
+            "category": "bench",
+            "name": "Скамья для жима регулируемая",
+            "manufacturer": "Under Armour",
+            "amount": 1,
+            "condition": "broken",
+            "icon_path": "assets/icons/bench.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "6dce98fd-1feb-41ea-873d-2249d53cd96f",
+            "category": "cardio_machine",
+            "name": "Беговая дорожка X-Fit",
+            "manufacturer": "Nike",
+            "amount": 1,
+            "condition": "new",
+            "icon_path": "assets/icons/cardio_machine.png",
+            "stackable": false,
+            "max_stack": null
+        },
+        {
+            "id": "e083b771-d766-43b7-a6a0-82e4b1a10d3b",
+            "category": "free_weight",
+            "name": "Гриф олимпийский 20кг",
+            "manufacturer": "Torneo",
+            "amount": 1,
+            "condition": "used",
+            "icon_path": "assets/icons/free_weight.png",
+            "stackable": false,
+            "max_stack": 20
+        }
+    ]
 }

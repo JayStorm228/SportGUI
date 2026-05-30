@@ -61,12 +61,23 @@ class User:
         save_path = UserData / f"{self.username}.json"
         tmp_path = UserData / f"{self.username}.json.tmp"
 
-        userdata: UserDataDict = {
-            "username": self.username,
-            "password_hash": self.password,
-            "password_salt": self.password_salt,
-            "registration_date": self.registration_date.strftime(date_format),
-            "inventory": [
+        from config import ROOT_DIR
+
+        inventory_data = []
+        for it in self.inventory.items:
+            # ИСПРАВЛЕНИЕ: Конвертируем путь к иконке в переносимый относительный (Bug 2)
+            icon_path_str = ""
+            if it.icon_path:
+                try:
+                    # Преобразуем абсолютный путь в относительный к ROOT_DIR
+                    icon_path_str = it.icon_path.relative_to(ROOT_DIR).as_posix()
+                except ValueError:
+                    # Если путь лежит вне папки проекта, сохраняем только имя файла
+                    icon_path_str = Path(it.icon_path).name
+            if not icon_path_str:
+                icon_path_str = "assets/icons/default.png"
+
+            inventory_data.append(
                 {
                     "id": it.id,
                     "category": it.category.value,
@@ -74,12 +85,18 @@ class User:
                     "manufacturer": it.manufacturer,
                     "amount": it.amount,
                     "condition": it.condition.value,
-                    "icon_path": str(it.icon_path),
+                    "icon_path": icon_path_str,
                     "stackable": it.stackable,
                     "max_stack": it.max_stack,
                 }
-                for it in self.inventory.items
-            ],
+            )
+
+        userdata: UserDataDict = {
+            "username": self.username,
+            "password_hash": self.password,
+            "password_salt": self.password_salt,
+            "registration_date": self.registration_date.strftime(date_format),
+            "inventory": inventory_data,
         }
 
         try:
@@ -118,6 +135,8 @@ class User:
                 password_salt=userdata.get("password_salt", ""),
             )
 
+            from config import ROOT_DIR
+
             for it in userdata.get("inventory", []):
                 try:
                     cat = ItemType(it["category"])
@@ -128,6 +147,35 @@ class User:
                     )
                     continue
 
+                # ИСПРАВЛЕНИЕ: Восстанавливаем переносимый относительный путь до абсолютного
+                icon_path_str = it.get("icon_path")
+                if not icon_path_str or icon_path_str == "None":
+                    icon_path_val = Icons / "default.png"
+                else:
+                    # 1. Проверяем относительный путь
+                    resolved_path = ROOT_DIR / icon_path_str
+                    if resolved_path.exists():
+                        icon_path_val = resolved_path
+                    else:
+                        # 2. Проверяем абсолютный путь (поддержка старых БД)
+                        alt_path = Path(icon_path_str)
+                        if alt_path.is_absolute() and alt_path.exists():
+                            icon_path_val = alt_path
+                        else:
+                            # 3. Проверяем по имени файла в папке Icons
+                            fn_path = Icons / alt_path.name
+                            if fn_path.exists():
+                                icon_path_val = fn_path
+                            else:
+                                icon_path_val = Icons / "default.png"
+
+                max_stack_val = it.get("max_stack")
+                if max_stack_val is not None:
+                    try:
+                        max_stack_val = int(max_stack_val)
+                    except (ValueError, TypeError):
+                        max_stack_val = None
+
                 item = Item(
                     id=it.get("id", str(uuid.uuid4())),
                     category=cat,
@@ -135,9 +183,9 @@ class User:
                     manufacturer=it["manufacturer"],
                     amount=int(it["amount"]),
                     condition=cond,
-                    icon_path=Path(it.get("icon_path", str(Icons / "default.png"))),
+                    icon_path=icon_path_val,
                     stackable=bool(it.get("stackable", False)),
-                    max_stack=it.get("max_stack"),
+                    max_stack=max_stack_val,
                 )
                 user.inventory.items.append(item)
 

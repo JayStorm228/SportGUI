@@ -15,28 +15,3 @@ dependencies = [
     "pyside6>=6.11.1",
     "ruff>=0.15.11",
 ]
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
-[tool.black]
-line-length = 88
-target-version = ["py314"]
-exclude = '''
-/(
-    \.git
-  | \.venv
-  | build
-  | dist
-)/
-'''
-
-[tool.ruff]
-line-length = 88
-target-version = "py314"
-select = ["E", "F", "I", "W"]
-ignore = []
-
-[tool.ruff.isort]
-combine-as-imports = true
